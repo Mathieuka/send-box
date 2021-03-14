@@ -1,0 +1,22 @@
+# env variables
+.env
+.env.local
+
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+serverless.yml
+.serverless
+.serverless_nextjs
+
+# Next build
+.next
+
+# Cypress
+cypress/videos
+cypress/screenshots
+
+# Jetbrain IDE
+.idea
