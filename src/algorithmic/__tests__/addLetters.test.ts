@@ -1,4 +1,4 @@
-import { addLetters } from '../algorithmic';
+import { addLetters } from '../addLetters';
 
 describe('Test Driven https://www.codewars.com/kata/5d50e3914861a500121e1958/train/typescript', () => {
     test('If there is no argument', () => {
