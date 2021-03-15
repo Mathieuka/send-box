@@ -5,46 +5,14 @@ import {
     NormalizedCacheObject,
     createHttpLink,
 } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import { isBrowser } from '../../helpers';
-import { getSession } from '../aws-sdk/cognito';
-
-const graphqlUrl = process.env.NEXT_PUBLIC_GRAPHQL_API_ENDPOINT;
-
-const httpLink = createHttpLink({
-    uri: graphqlUrl,
-});
-
-const authLink = setContext(async (_, { headers }) => {
-    try {
-        const { session } = await getSession();
-        const token = await session?.getIdToken().getJwtToken();
-        return {
-            headers: {
-                ...headers,
-                authorization: `Bearer ${token}`,
-            },
-        };
-    } catch (err) {
-        throw new Error('[apollo.ts] no session found');
-    }
-});
 
 function createApolloClient() {
     return new ApolloClient({
-        ssrMode: !isBrowser(), // set to true for SSR
-        link: authLink.concat(httpLink),
+        ssrMode: typeof window === 'undefined', // set to true for SSR
+        link: createHttpLink({
+            uri: 'https://api.graphqlplaceholder.com/',
+        }),
         cache: new InMemoryCache(),
-        /* defaultOptions: {
-            watchQuery: {
-                fetchPolicy: 'cache-and-network',
-            },
-            query: {
-                fetchPolicy: 'cache-first',
-                errorPolicy: 'all',
-            },
-            ...other options
-        }, */
     });
 }
 
@@ -72,7 +40,7 @@ export function initializeApollo(
     }
 
     // For SSG and SSR always create a new Apollo Client
-    if (!isBrowser()) return currentApolloClient;
+    if (typeof window === 'undefined') return currentApolloClient;
 
     // Create the Apollo Client once in the client
     if (!apolloClient) apolloClient = currentApolloClient;
