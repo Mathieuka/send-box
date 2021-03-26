@@ -3,39 +3,25 @@ import { within } from '@testing-library/react';
 import { MockApolloClient } from 'mock-apollo-client';
 import { ApolloProvider } from '@apollo/client';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import { IntlProvider } from 'react-intl';
 import theme from '../muiTheme';
-import Routes from '../../helpers/routes';
-import locales from '../i18n/local';
-import { Lang } from '../i18n/types';
 
 interface IProvider {
     children?: ReactNode;
 }
 
 interface IAllTheProviders {
-    path?: Routes;
     mockApolloClient?: MockApolloClient;
 }
 
 export const createAllTheProviders = (obj: IAllTheProviders) =>
     function callBack({ children }: IProvider): JSX.Element {
-        const { mockApolloClient, path } = obj;
-        const localeCopy = locales[Lang.en];
-        const messages = localeCopy[path || ''];
+        const { mockApolloClient } = obj;
+
         return (
             <ApolloProvider
                 client={mockApolloClient || ({} as MockApolloClient)}
             >
-                <MuiThemeProvider theme={theme}>
-                    <IntlProvider
-                        locale="en"
-                        defaultLocale="en"
-                        messages={messages as Record<string, string>}
-                    >
-                        {children}
-                    </IntlProvider>
-                </MuiThemeProvider>
+                <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>
             </ApolloProvider>
         );
         return <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>;
@@ -64,28 +50,4 @@ export const materialUITestHelper = {
             text
         );
     },
-};
-
-export interface ImockRouter {
-    push: jest.Mock<any, any>;
-    pathname: Routes;
-}
-
-interface ICreateMockRouter {
-    spyOnMockRouter: jest.SpyInstance<any, any>;
-    mockRouter: ImockRouter;
-}
-
-export const createMockRouter = (obj: {
-    pathname: Routes;
-}): ICreateMockRouter => {
-    const mockRouter = {
-        push: jest.fn(),
-        pathname: obj.pathname,
-    };
-
-    return {
-        spyOnMockRouter: jest.spyOn(mockRouter, 'push'),
-        mockRouter,
-    };
 };

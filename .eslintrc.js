@@ -37,6 +37,8 @@ module.exports = {
         'plugin:jest-dom/recommended',
     ],
     rules: {
+        '@typescript-eslint/no-var-requires': 0,
+        'react/require-default-props': 0,
         'import/prefer-default-export': 'off',
         'import/no-extraneous-dependencies': [
             'error',
@@ -46,14 +48,12 @@ module.exports = {
         ],
         'no-restricted-syntax': 'off',
         'react/display-name': 'off',
-        'react/require-default-props': 0,
         'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
         'import/extensions': 0,
         'react/prop-types': 0,
         'react/jsx-props-no-spreading': ['error', { custom: 'ignore' }],
         'prettier/prettier': 'error',
         'react/react-in-jsx-scope': 'off',
-        // see https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-shadow.md
         'no-shadow': 'off',
         '@typescript-eslint/no-shadow': 'off',
         'jsx-a11y/label-has-associated-control': 'off',
