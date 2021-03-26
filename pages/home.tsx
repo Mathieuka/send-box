@@ -1,7 +1,11 @@
-import { useQuery } from '@apollo/client';
+import { ApolloClient, NormalizedCacheObject, useQuery } from '@apollo/client';
 import { GET_USER } from '../src/graphql/query';
 
-const Home = (): JSX.Element => {
+interface IHome {
+    apolloClient?: ApolloClient<NormalizedCacheObject>;
+}
+
+const Home = ({ apolloClient }: IHome): JSX.Element => {
     const { loading, error, data } = useQuery(GET_USER, {
         variables: { userId: 10 },
     });
@@ -18,6 +22,7 @@ const Home = (): JSX.Element => {
         <div className="grid">
             <div>User information:</div>
             <div>Name: {data.user.name}</div>
+            <div>Id: {data.user.id}</div>
         </div>
     );
 };
