@@ -67,8 +67,13 @@ const Home = (): JSX.Element => {
                         <Input
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
+                            data-testid="input-name"
                         />
-                        <Button type="submit" variant="contained">
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            data-testid="submit-new-user"
+                        >
                             Add user
                         </Button>
                     </form>
