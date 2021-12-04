@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { MutableRefObject, useEffect, useRef } from 'react';
 
 const Home = (): JSX.Element => {
     const inputRef: MutableRefObject<any> = useRef(null);
