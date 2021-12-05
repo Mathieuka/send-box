@@ -19,25 +19,31 @@ const buildMatrix = (posters: number, colorsAvailable: number) => {
 };
 
 export const checkChoose = (posters: number, colorsAvailable: number): any => {
-    // let result = null;
+    if (posters === colorsAvailable) return 1;
+    let result: any = null;
     const matrix = buildMatrix(posters, colorsAvailable);
-    matrix.forEach((vector, matrixIdx) => {
-        for (let vectorIdx = 0; vectorIdx < vector.length; vectorIdx += 1) {
+    for (let matrixIdx = 0; matrixIdx < matrix.length; matrixIdx += 1) {
+        for (
+            let vectorIdx = 0;
+            vectorIdx < matrix[matrixIdx].length;
+            vectorIdx += 1
+        ) {
             if (matrixIdx !== 0 && vectorIdx <= matrixIdx) {
-                if (vector[vectorIdx] === 0) {
+                if (matrix[matrixIdx][vectorIdx] === 0) {
                     matrix[matrixIdx][vectorIdx] =
                         matrix[matrixIdx - 1][vectorIdx] +
                         matrix[matrixIdx - 1][vectorIdx - 1];
-                    // if (matrix[matrixIdx][vectorIdx] === posters) {
-                    //     result = vectorIdx
-                    // }
+                    if (
+                        matrixIdx <= colorsAvailable &&
+                        matrix[matrixIdx][vectorIdx] === posters
+                    ) {
+                        result = vectorIdx;
+                        break;
+                    }
                 }
             }
         }
-    });
-    console.log('[matrix] ', matrix);
-    return matrix;
+    }
+    if (!result) return -1;
+    return result;
 };
-// Je checkout au vecteur precedent
-// J'additionne l'index courant + l'index precedent
-// update la l'index courant avec la somme
