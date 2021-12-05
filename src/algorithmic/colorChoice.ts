@@ -20,7 +20,6 @@ const buildMatrix = (posters: number, colorsAvailable: number) => {
 
 export const checkChoose = (posters: number, colorsAvailable: number): any => {
     if (posters === colorsAvailable) return 1;
-    let result: any = null;
     const matrix = buildMatrix(posters, colorsAvailable);
     for (let matrixIdx = 0; matrixIdx < matrix.length; matrixIdx += 1) {
         for (
@@ -37,13 +36,11 @@ export const checkChoose = (posters: number, colorsAvailable: number): any => {
                         matrixIdx <= colorsAvailable &&
                         matrix[matrixIdx][vectorIdx] === posters
                     ) {
-                        result = vectorIdx;
-                        break;
+                        return vectorIdx;
                     }
                 }
             }
         }
     }
-    if (!result) return -1;
-    return result;
+    return -1;
 };
