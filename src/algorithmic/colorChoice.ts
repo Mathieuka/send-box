@@ -4,7 +4,7 @@ const buildMatrix = (posters: number, colorsAvailable: number) => {
     for (let idx = 1; idx < posters; idx += 1) {
         matrix = [
             ...matrix,
-            Array.from({ length: colorsAvailable + 1 }).fill(0),
+            [1, ...Array.from({ length: colorsAvailable }).fill(0)],
         ];
     }
     return matrix;
