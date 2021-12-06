@@ -2,8 +2,7 @@ const buildMatrix = (posters: number, colorsAvailable: number) => {
     let matrix: number[][] = [
         [1, ...(Array.from({ length: colorsAvailable }).fill(0) as number[])],
     ];
-
-    for (let idx = 1; idx < posters; idx += 1) {
+    for (let idx = 1; idx <= colorsAvailable; idx += 1) {
         matrix = [
             ...matrix,
             [
@@ -14,7 +13,6 @@ const buildMatrix = (posters: number, colorsAvailable: number) => {
             ],
         ];
     }
-
     return matrix;
 };
 
