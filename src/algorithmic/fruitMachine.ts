@@ -1,4 +1,12 @@
-const scoreTable = {
+interface ScoreTable {
+    [keys: string]: number;
+}
+
+interface FruitsQty {
+    [key: string]: number;
+}
+
+const scoreTable: ScoreTable = {
     Jack: 1,
     Queen: 2,
     King: 3,
@@ -10,11 +18,8 @@ const scoreTable = {
     Star: 9,
     Wild: 10,
 };
-interface FruitsQty {
-    [key: string]: number;
-}
 
-export const getFruitsOccurrences = (reels: string[][], spins: number[]) => {
+export const getFruitsWithQuantity = (reels: string[][], spins: number[]) => {
     const reelsFruitsResult: string[] = [
         reels[0][spins[0]],
         reels[1][spins[1]],
@@ -31,7 +36,7 @@ export const getFruitsOccurrences = (reels: string[][], spins: number[]) => {
     });
 
     for (const fruit in fruitsQty) {
-        if (fruitsQty[fruit] < 2) {
+        if (fruit !== 'Wild' && fruitsQty[fruit] < 2) {
             delete fruitsQty[fruit];
         }
     }
@@ -40,8 +45,21 @@ export const getFruitsOccurrences = (reels: string[][], spins: number[]) => {
 };
 
 export const fruit = (reels: string[][], spins: number[]): number => {
-    const fruitsOccurrences = getFruitsOccurrences(reels, spins);
-    console.log('[fruitsOccurrences] ', fruitsOccurrences);
-
-    return 0;
+    const fruitsWithQuantity = getFruitsWithQuantity(reels, spins);
+    let doubleTheScoreBy2 = false;
+    let score = 0;
+    for (const fruit in fruitsWithQuantity) {
+        const twoFruits = fruitsWithQuantity[fruit] === 2;
+        const threeFruits = fruitsWithQuantity[fruit] === 3;
+        if (fruit === 'Wild' && fruitsWithQuantity[fruit] === 1) {
+            doubleTheScoreBy2 = true;
+        }
+        if (twoFruits) {
+            score = scoreTable[fruit];
+        }
+        if (threeFruits) {
+            score = scoreTable[fruit] * 10;
+        }
+    }
+    return doubleTheScoreBy2 ? score * 2 : score;
 };
