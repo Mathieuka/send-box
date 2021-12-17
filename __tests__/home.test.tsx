@@ -27,7 +27,7 @@ function createApolloClient() {
 
 const apolloClient = createApolloClient();
 
-test('test msw', async () => {
+test.skip('test msw', async () => {
     const { findByText, getByTestId } = screen;
 
     render(
