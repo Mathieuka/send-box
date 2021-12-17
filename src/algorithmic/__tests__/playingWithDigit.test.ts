@@ -9,5 +9,3 @@ describe('Play with digit', () => {
         expect(G964.digPow(4288, 5)).toEqual(-1);
     });
 });
-
-// sum(1026) / n(114) = v(9)
