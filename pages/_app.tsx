@@ -6,11 +6,6 @@ import Head from 'next/head';
 import theme from '../src/muiTheme';
 import useApollo from '../src/apollo';
 
-if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-    // eslint-disable-next-line global-require
-    require('../src/mocks');
-}
-
 const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
     const apolloClient = useApollo(pageProps.initialApolloState);
 

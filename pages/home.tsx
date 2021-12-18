@@ -1,24 +1,10 @@
-import { MutableRefObject, useEffect, useRef } from 'react';
+import { useIdle } from '../src/hooks/useIdle';
 
 const Home = (): JSX.Element => {
-    const inputRef: MutableRefObject<any> = useRef(null);
+    const { id } = useIdle(4000);
+    console.log('[process in progress] ', id);
 
-    function handleClick() {
-        inputRef?.current?.focus();
-    }
-
-    useEffect(() => {
-        handleClick();
-    }, []);
-
-    return (
-        <div>
-            <input ref={inputRef} type="text" />
-            <button type="button" onClick={handleClick}>
-                Focus the input
-            </button>
-        </div>
-    );
+    return <div>Hello</div>;
 };
 
 export default Home;

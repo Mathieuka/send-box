@@ -4,7 +4,7 @@ import faker from 'faker';
 let users = [
     {
         name: faker.name.firstName(),
-        id: faker.random.uuid(),
+        id: faker.datatype.uuid(),
         __typename: 'User',
     },
 ];
@@ -35,7 +35,7 @@ export const handlers = [
         const { name } = req.variables;
         users = [
             ...users,
-            { name, id: faker.random.uuid(), __typename: 'User' },
+            { name, id: faker.datatype.uuid(), __typename: 'User' },
         ];
         return res(
             ctx.data({
