@@ -14,19 +14,16 @@ export function superStreetFighterSelection(
         if (direction === 'right') {
             if (
                 fighters[currentRow][currentColumn + 1] === '' ||
-                currentColumn + 1 > colLength
+                currentColumn + 1 > fighters[0].length - 1
             ) {
-                if (currentColumn + 1 > colLength) {
+                if (currentColumn + 1 >= fighters[0].length - 1) {
                     currentColumn = 0;
                 } else {
                     currentColumn += 1;
                 }
-
+                // shift on right as long as on empty case
                 while (fighters[currentRow][currentColumn] === '') {
                     currentColumn += 1;
-                    if (currentColumn + 1 > fighters[0].length) {
-                        currentColumn = 0;
-                    }
                 }
             } else {
                 currentColumn += 1;
@@ -38,17 +35,14 @@ export function superStreetFighterSelection(
                 fighters[currentRow][currentColumn - 1] === '' ||
                 currentColumn - 1 < 0
             ) {
-                if (currentColumn - 1 < 0) {
+                if (currentColumn - 1 <= 0) {
                     currentColumn = colLength;
                 } else {
                     currentColumn -= 1;
                 }
-
+                // shift on left as long as on empty case
                 while (fighters[currentRow][currentColumn] === '') {
                     currentColumn -= 1;
-                    if (currentColumn - 1 < 0) {
-                        currentColumn = colLength;
-                    }
                 }
             } else {
                 currentColumn -= 1;
