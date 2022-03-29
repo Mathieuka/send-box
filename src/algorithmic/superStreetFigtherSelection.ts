@@ -34,12 +34,15 @@ export function superStreetFighterSelection(
         }
 
         if (direction === 'left') {
-            if (fighters[currentRow][currentColumn - 1] === '') {
+            if (
+                fighters[currentRow][currentColumn - 1] === '' ||
+                currentColumn - 1 < 0
+            ) {
                 if (currentColumn - 1 < 0) {
                     currentColumn = colLength;
                 } else {
+                    currentColumn -= 1;
                 }
-                currentColumn -= 1;
 
                 while (fighters[currentRow][currentColumn] === '') {
                     currentColumn -= 1;
