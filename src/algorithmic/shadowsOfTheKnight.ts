@@ -27,14 +27,28 @@ export const shadowsOfTheKnight = (input: {
         if (jumpsCounter > maxJumps) return 'You did too much jumping';
 
         if (direction === 'R') {
-            const mid = Math.floor((currentX + width) / 2);
-            currentX = mid;
+            currentX = Math.floor((currentX + width) / 2);
+            const bombIsAtTheEndOfTheRowJustToTheRight = currentX + 1 === width;
 
-            const bombIsAtTheEndOfTheLineJustToTheRight = mid + 1 === width;
-            if (bombIsAtTheEndOfTheLineJustToTheRight) {
-                currentX = mid + 1;
+            if (bombIsAtTheEndOfTheRowJustToTheRight) {
+                currentX += 1;
                 consoleLog = `${currentX.toString()} ${currentY.toString()}`;
             } else {
+                // New position is `${currentX.toString()} ${currentY.toString()}`
+                consoleLog = `${currentX.toString()} ${currentY.toString()}`;
+            }
+        }
+
+        if (direction === 'L') {
+            currentX = Math.floor((width - currentX) / 2);
+            const bombIsAtTheStartOfTheRowJustToTheLeft =
+                currentX + (width - 1) === width;
+
+            if (bombIsAtTheStartOfTheRowJustToTheLeft) {
+                currentX -= 1;
+                consoleLog = `${currentX.toString()} ${currentY.toString()}`;
+            } else {
+                // New position is `${currentX.toString()} ${currentY.toString()}`
                 consoleLog = `${currentX.toString()} ${currentY.toString()}`;
             }
         }
