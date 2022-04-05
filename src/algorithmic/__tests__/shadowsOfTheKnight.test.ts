@@ -60,7 +60,7 @@ describe('shadowsOfTheKnight', () => {
             */
         });
 
-        test('Medium 5x5', () => {
+        test('Medium 5x5 bomb in border', () => {
             expect(
                 shadowsOfTheKnight({
                     width: 5,
@@ -78,6 +78,30 @@ describe('shadowsOfTheKnight', () => {
                     [0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0],
                     [0, 0, 0, d, 0, x],
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                ];
+            */
+        });
+
+        test('Medium 5x5 bomb before border', () => {
+            expect(
+                shadowsOfTheKnight({
+                    width: 5,
+                    height: 5,
+                    maxJumps: 2,
+                    X0: 3,
+                    Y0: 3,
+                    bombDir: ['R'],
+                    bombCoordinate: '4 3',
+                })
+            ).toEqual('4 3');
+            /*
+                const arr = [
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, d, x, 0],
                     [0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0],
                 ];
@@ -193,7 +217,7 @@ describe('shadowsOfTheKnight', () => {
             */
         });
 
-        test('Medium 5x5', () => {
+        test('Medium 5x5 bomb in border', () => {
             expect(
                 shadowsOfTheKnight({
                     width: 5,
@@ -210,7 +234,31 @@ describe('shadowsOfTheKnight', () => {
                     [0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0],
-                    [x, 0, d, 0, 0, 0], 5 - 2 = 3
+                    [x, 0, d, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                ];
+            */
+        });
+
+        test('Medium 5x5 before border', () => {
+            expect(
+                shadowsOfTheKnight({
+                    width: 5,
+                    height: 5,
+                    maxJumps: 1,
+                    X0: 2,
+                    Y0: 3,
+                    bombDir: ['L'],
+                    bombCoordinate: '1 3',
+                })
+            ).toEqual('1 3');
+            /*
+                const arr = [
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                    [0, x, d, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0],
                 ];
@@ -280,6 +328,56 @@ describe('shadowsOfTheKnight', () => {
                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                ];
+            */
+        });
+    });
+
+    describe('The bomb is in up', () => {
+        test('Medium 5x5', () => {
+            expect(
+                shadowsOfTheKnight({
+                    width: 5,
+                    height: 5,
+                    maxJumps: 2,
+                    X0: 2,
+                    Y0: 3,
+                    bombDir: ['U', 'U'],
+                    bombCoordinate: '2 1',
+                })
+            ).toEqual('2 1');
+            /*
+                const arr = [
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, x, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, d, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                ];
+            */
+        });
+
+        test('Medium 5x5 just bomb in border', () => {
+            expect(
+                shadowsOfTheKnight({
+                    width: 5,
+                    height: 5,
+                    maxJumps: 3,
+                    X0: 2,
+                    Y0: 3,
+                    bombDir: ['U', 'U'],
+                    bombCoordinate: '2 0',
+                })
+            ).toEqual('2 0');
+            /*
+                const arr = [
+                    [0, 0, x, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, d, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
                 ];
             */
         });

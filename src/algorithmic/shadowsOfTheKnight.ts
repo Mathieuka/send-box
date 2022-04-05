@@ -12,7 +12,7 @@ export const shadowsOfTheKnight = (input: {
     let jumpsCounter = 0;
     let consoleLog = '';
     let currentX = X0;
-    const currentY = Y0;
+    let currentY = Y0;
     const bombIsInDepartPosition =
         `${X0.toString()} ${Y0.toString()}` === bombCoordinate;
 
@@ -27,30 +27,21 @@ export const shadowsOfTheKnight = (input: {
         if (jumpsCounter > maxJumps) return 'You did too much jumping';
 
         if (direction === 'R') {
-            currentX = Math.floor((currentX + width) / 2);
-            const bombIsAtTheEndOfTheRowJustToTheRight = currentX + 1 === width;
-
-            if (bombIsAtTheEndOfTheRowJustToTheRight) {
-                currentX += 1;
-                consoleLog = `${currentX.toString()} ${currentY.toString()}`;
-            } else {
-                // New position is `${currentX.toString()} ${currentY.toString()}`
-                consoleLog = `${currentX.toString()} ${currentY.toString()}`;
-            }
+            currentX =
+                currentX + 1 === width
+                    ? width
+                    : Math.floor((currentX + width) / 2);
+            consoleLog = `${currentX.toString()} ${currentY.toString()}`;
         }
 
         if (direction === 'L') {
-            currentX = Math.floor((width - currentX) / 2);
-            const bombIsAtTheStartOfTheRowJustToTheLeft =
-                currentX + (width - 1) === width;
+            currentX = currentX - 1 === 0 ? 0 : Math.floor(currentX / 2);
+            consoleLog = `${currentX.toString()} ${currentY.toString()}`;
+        }
 
-            if (bombIsAtTheStartOfTheRowJustToTheLeft) {
-                currentX -= 1;
-                consoleLog = `${currentX.toString()} ${currentY.toString()}`;
-            } else {
-                // New position is `${currentX.toString()} ${currentY.toString()}`
-                consoleLog = `${currentX.toString()} ${currentY.toString()}`;
-            }
+        if (direction === 'U') {
+            currentY = currentY === 1 ? 0 : Math.floor(currentY / 2);
+            consoleLog = `${currentX.toString()} ${currentY.toString()}`;
         }
     }
     return consoleLog;
