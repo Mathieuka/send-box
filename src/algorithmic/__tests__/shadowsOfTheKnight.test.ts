@@ -3,41 +3,152 @@ import { shadowsOfTheKnight } from '../shadowsOfTheKnight';
 // Possible direction: U, UR, R, DR, D, DL, L, UL
 
 describe('shadowsOfTheKnight', () => {
-    test('The bomb is in the same place', () => {
-        expect(
-            shadowsOfTheKnight({
-                width: 5,
-                height: 5,
-                maxJumps: 1,
-                X0: 2,
-                Y0: 2,
-                bombDir: '',
-                bombCoordinate: '2 2',
-            })
-        ).toEqual('2 2');
+    describe('The bomb is in the same place', () => {
+        test('5X5', () => {
+            expect(
+                shadowsOfTheKnight({
+                    width: 5,
+                    height: 5,
+                    maxJumps: 1,
+                    X0: 2,
+                    Y0: 2,
+                    bombDir: [''],
+                    bombCoordinate: '2 2',
+                })
+            ).toEqual('2 2');
+        });
     });
 
-    // test('The bomb is just one jump Down', () => {
-    //     expect(
-    //         shadowsOfTheKnight({
-    //             width: 5,
-    //             height: 5,
-    //             maxJumps: 1,
-    //             X0: 2,
-    //             Y0: 2,
-    //             bombDir: 'D',
-    //             bombCoordinate: '2 3',
-    //         })
-    //     ).toEqual('2 3');
-    // });
-});
+    describe('The bomb is in right', () => {
+        test('Small 1x1', () => {
+            expect(
+                shadowsOfTheKnight({
+                    width: 1,
+                    height: 1,
+                    maxJumps: 1,
+                    X0: 0,
+                    Y0: 0,
+                    bombDir: ['R'],
+                    bombCoordinate: '1 0',
+                })
+            ).toEqual('1 0');
+            /*
+                const arr = [
+                    [d, x],
+                    [0, 0],
+                ];
+            */
+        });
+        test('Small 2x2', () => {
+            expect(
+                shadowsOfTheKnight({
+                    width: 2,
+                    height: 2,
+                    maxJumps: 2,
+                    X0: 1,
+                    Y0: 1,
+                    bombDir: ['R', 'R'],
+                    bombCoordinate: '2 1',
+                })
+            ).toEqual('2 1');
+            /*
+                const arr = [
+                    [0, 0, 0],
+                    [0, d, x],
+                    [0, 0, 0],
+                ];
+            */
+        });
 
-/*
-const arr = [
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-];
-*/
+        test('Medium 5x5', () => {
+            expect(
+                shadowsOfTheKnight({
+                    width: 5,
+                    height: 5,
+                    maxJumps: 2,
+                    X0: 3,
+                    Y0: 3,
+                    bombDir: ['R', 'R'],
+                    bombCoordinate: '5 3',
+                })
+            ).toEqual('5 3');
+            /*
+                const arr = [
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, d, 0, x],
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0],
+                ];
+            */
+        });
+
+        test('Large 10x10', () => {
+            expect(
+                shadowsOfTheKnight({
+                    width: 10,
+                    height: 10,
+                    maxJumps: 2,
+                    X0: 5,
+                    Y0: 5,
+                    bombDir: ['R', 'R'],
+                    bombCoordinate: '8 5',
+                })
+            ).toEqual('8 5');
+            /*
+                const arr = [
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, d, 0, 0, x, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                ];
+            */
+        });
+
+        test('Very Large 20x20', () => {
+            expect(
+                shadowsOfTheKnight({
+                    width: 20,
+                    height: 20,
+                    maxJumps: 3,
+                    X0: 10,
+                    Y0: 10,
+                    bombDir: ['R', 'R', 'R'],
+                    bombCoordinate: '18 10',
+                })
+            ).toEqual('18 10');
+            /*
+                const arr = [
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, d, 0, 0, 0, ., 0, .., 0, x, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                ];
+            */
+        });
+    });
+});
