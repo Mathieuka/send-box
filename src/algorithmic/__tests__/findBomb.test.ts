@@ -108,7 +108,7 @@ describe('Find bomb based on direction left or right with jump number threshold'
         });
     });
 
-    describe('Find bomb in both direction', () => {
+    describe('Find bomb in both direction start to right', () => {
         test('random initial position', () => {
             expect(
                 findBomb({
@@ -120,6 +120,48 @@ describe('Find bomb based on direction left or right with jump number threshold'
                 })
             ).toEqual(4);
             // [0,0,i,0,b,0,1,0,0,0,0]
+        });
+
+        test('random initial position large array', () => {
+            expect(
+                findBomb({
+                    width: 20,
+                    initialPosition: 1,
+                    jumpThreshold: 3,
+                    direction: ['R', 'L', 'R'],
+                    bombPosition: 8,
+                })
+            ).toEqual(8);
+            // hiy: 9, 6, 8
+            // [0,i,0,0,0,0,2,0,b,0,0, 1, 0,0,0,0,0,0,0,0,0]
+        });
+    });
+    describe('Find bomb in both direction start to left', () => {
+        test('random initial position', () => {
+            expect(
+                findBomb({
+                    width: 10,
+                    initialPosition: 8,
+                    jumpThreshold: 2,
+                    direction: ['L', 'R'],
+                    bombPosition: 6,
+                })
+            ).toEqual(6);
+            // [0,0,0,0,1,0,b,0,i,0,0]
+        });
+
+        test('random initial position large array', () => {
+            expect(
+                findBomb({
+                    width: 20,
+                    initialPosition: 18,
+                    jumpThreshold: 3,
+                    direction: ['L', 'R', 'L'],
+                    bombPosition: 9,
+                })
+            ).toEqual(9);
+            // hit: 11, 7, 9
+            // [0,0,0,0,0,0,0,0,0,1,0,b,0,2,0,0,0,0,i,0,0]
         });
     });
 });
