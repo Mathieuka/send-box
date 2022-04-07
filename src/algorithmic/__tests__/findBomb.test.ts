@@ -107,4 +107,19 @@ describe('Find bomb based on direction left or right with jump number threshold'
             // [0,0,b,0,1,0,0,0,i,0,0]
         });
     });
+
+    describe('Find bomb in both direction', () => {
+        test('random initial position', () => {
+            expect(
+                findBomb({
+                    width: 10,
+                    initialPosition: 2,
+                    jumpThreshold: 1,
+                    direction: ['R', 'L'],
+                    bombPosition: 4,
+                })
+            ).toEqual(4);
+            // [0,0,i,0,b,0,1,0,0,0,0]
+        });
+    });
 });
