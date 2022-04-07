@@ -14,13 +14,21 @@ export const findBomb = ({
     let consoleLog: null | number = null;
     let index = 0;
     let jumps = 0;
-    let start = initialPosition;
+    let start = 0;
     const end = width + 1;
+    let mid: number | null = null;
 
     while (consoleLog !== bombPosition) {
         if (jumps > jumpThreshold) return 'Too much jumping';
+
         if (direction[index] === 'R') {
-            const mid = Math.floor((start + end) / 2);
+            mid = Math.floor((start + end) / 2);
+            start = mid;
+            consoleLog = mid;
+        }
+
+        if (direction[index] === 'L') {
+            mid = Math.floor((end - start) / 2);
             start = mid;
             consoleLog = mid;
         }
