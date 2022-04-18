@@ -6,24 +6,28 @@ describe('Find bomb based on direction left or right with jump number threshold'
             expect(
                 findBomb({
                     width: 10,
-                    initialPosition: 0,
+                    height: 0,
+                    X0: 0,
+                    Y0: 0,
                     jumpThreshold: 1,
                     direction: ['R'],
-                    bombPosition: 5,
+                    bombPosition: '5 0',
                 })
-            ).toEqual(5);
+            ).toEqual('5 0');
             // [i,0,0,0,0,b,0,0,0,0,0]
         });
         test('Two jump', () => {
             expect(
                 findBomb({
                     width: 10,
-                    initialPosition: 0,
+                    height: 0,
+                    X0: 0,
+                    Y0: 0,
                     jumpThreshold: 2,
                     direction: ['R', 'R'],
-                    bombPosition: 8,
+                    bombPosition: '8 0',
                 })
-            ).toEqual(8);
+            ).toEqual('8 0');
             // [i,0,0,0,0,0,0,0,b,0,0]
         });
 
@@ -31,12 +35,14 @@ describe('Find bomb based on direction left or right with jump number threshold'
             expect(
                 findBomb({
                     width: 10,
-                    initialPosition: 1,
+                    height: 0,
+                    X0: 1,
+                    Y0: 0,
                     jumpThreshold: 1,
                     direction: ['R'],
-                    bombPosition: 6,
+                    bombPosition: '6 0',
                 })
-            ).toEqual(6);
+            ).toEqual('6 0');
             // [0,i,0,0,0,0,b,0,0,0,0]
         });
 
@@ -44,12 +50,14 @@ describe('Find bomb based on direction left or right with jump number threshold'
             expect(
                 findBomb({
                     width: 10,
-                    initialPosition: 1,
+                    height: 0,
+                    X0: 1,
+                    Y0: 0,
                     jumpThreshold: 1,
                     direction: ['R', 'R'],
-                    bombPosition: 8,
+                    bombPosition: '8 0',
                 })
-            ).toEqual(8);
+            ).toEqual('8 0');
             // [0,i,0,0,0,0,0,0,b,0,0]
         });
     });
@@ -59,12 +67,14 @@ describe('Find bomb based on direction left or right with jump number threshold'
             expect(
                 findBomb({
                     width: 10,
-                    initialPosition: 10,
+                    height: 0,
+                    X0: 10,
+                    Y0: 0,
                     jumpThreshold: 1,
                     direction: ['L'],
-                    bombPosition: 5,
+                    bombPosition: '5 0',
                 })
-            ).toEqual(5);
+            ).toEqual('5 0');
             // [0,0,0,0,0,b,0,0,0,0,i]
         });
 
@@ -72,12 +82,14 @@ describe('Find bomb based on direction left or right with jump number threshold'
             expect(
                 findBomb({
                     width: 10,
-                    initialPosition: 10,
+                    height: 0,
+                    X0: 10,
+                    Y0: 0,
                     jumpThreshold: 2,
                     direction: ['L', 'L'],
-                    bombPosition: 2,
+                    bombPosition: '2 0',
                 })
-            ).toEqual(2);
+            ).toEqual('2 0');
             // [0,0,b,0,0,0,0,0,0,0,i]
         });
 
@@ -85,12 +97,14 @@ describe('Find bomb based on direction left or right with jump number threshold'
             expect(
                 findBomb({
                     width: 10,
-                    initialPosition: 9,
+                    height: 0,
+                    X0: 9,
+                    Y0: 0,
                     jumpThreshold: 1,
                     direction: ['L'],
-                    bombPosition: 4,
+                    bombPosition: '4 0',
                 })
-            ).toEqual(4);
+            ).toEqual('4 0');
             // [0,0,0,0,b,0,0,0,0,i,0]
         });
 
@@ -98,12 +112,14 @@ describe('Find bomb based on direction left or right with jump number threshold'
             expect(
                 findBomb({
                     width: 10,
-                    initialPosition: 8,
+                    height: 0,
+                    X0: 8,
+                    Y0: 0,
                     jumpThreshold: 1,
                     direction: ['L', 'L'],
-                    bombPosition: 2,
+                    bombPosition: '2 0',
                 })
-            ).toEqual(2);
+            ).toEqual('2 0');
             // [0,0,b,0,1,0,0,0,i,0,0]
         });
     });
@@ -113,12 +129,14 @@ describe('Find bomb based on direction left or right with jump number threshold'
             expect(
                 findBomb({
                     width: 10,
-                    initialPosition: 2,
+                    height: 0,
+                    X0: 2,
+                    Y0: 0,
                     jumpThreshold: 1,
                     direction: ['R', 'L'],
-                    bombPosition: 4,
+                    bombPosition: '4 0',
                 })
-            ).toEqual(4);
+            ).toEqual('4 0');
             // [0,0,i,0,b,0,1,0,0,0,0]
         });
 
@@ -126,12 +144,14 @@ describe('Find bomb based on direction left or right with jump number threshold'
             expect(
                 findBomb({
                     width: 20,
-                    initialPosition: 1,
+                    height: 0,
+                    X0: 1,
+                    Y0: 0,
                     jumpThreshold: 3,
                     direction: ['R', 'L', 'R'],
-                    bombPosition: 8,
+                    bombPosition: '8 0',
                 })
-            ).toEqual(8);
+            ).toEqual('8 0');
             // hiy: 9, 6, 8
             // [0,i,0,0,0,0,2,0,b,0,0, 1, 0,0,0,0,0,0,0,0,0]
         });
@@ -141,12 +161,14 @@ describe('Find bomb based on direction left or right with jump number threshold'
             expect(
                 findBomb({
                     width: 10,
-                    initialPosition: 8,
+                    height: 0,
+                    X0: 8,
+                    Y0: 0,
                     jumpThreshold: 2,
                     direction: ['L', 'R'],
-                    bombPosition: 6,
+                    bombPosition: '6 0',
                 })
-            ).toEqual(6);
+            ).toEqual('6 0');
             // [0,0,0,0,1,0,b,0,i,0,0]
         });
 
@@ -154,14 +176,41 @@ describe('Find bomb based on direction left or right with jump number threshold'
             expect(
                 findBomb({
                     width: 20,
-                    initialPosition: 18,
+                    height: 0,
+                    X0: 18,
+                    Y0: 0,
                     jumpThreshold: 3,
                     direction: ['L', 'R', 'L'],
-                    bombPosition: 9,
+                    bombPosition: '9 0',
                 })
-            ).toEqual(9);
+            ).toEqual('9 0');
             // hit: 11, 7, 9
             // [0,0,0,0,0,0,0,0,0,1,0,b,0,2,0,0,0,0,i,0,0]
+        });
+    });
+
+    describe.skip('Find bomb in down right', () => {
+        test('middle inital position', () => {
+            expect(
+                findBomb({
+                    width: 6,
+                    height: 6,
+                    X0: 3,
+                    Y0: 2,
+                    jumpThreshold: 3,
+                    direction: ['DR'],
+                    bombPosition: '9 0',
+                })
+            ).toEqual('4 3');
+            // hit:
+            /*
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,i,0,0,0]
+            [0,0,0,0,b,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            */
         });
     });
 });
