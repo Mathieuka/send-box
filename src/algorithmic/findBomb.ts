@@ -31,6 +31,9 @@ export const findBomb = ({
     } else if (direction[0] === 'L' || direction[0] === 'DL') {
         endX = 0;
         endY = height;
+    } else if (direction[0] === 'UR') {
+        endX = width + 1;
+        endY = 0;
     }
 
     while (consoleLog !== bombPosition) {
@@ -110,6 +113,21 @@ export const findBomb = ({
             console.log('DL consoleLog => ', `${midX} ${midY}`);
             consoleLog = `${midX} ${midY}`;
             if (direction[index + 1] === 'DL' || direction[index + 1] === 'L') {
+                startX = midX;
+                startY = midY;
+            }
+        }
+
+        if (
+            direction[index] === 'UR' &&
+            typeof endX === 'number' &&
+            typeof endY === 'number'
+        ) {
+            midX = Math.floor((startX + endX) / 2);
+            midY = Math.floor((startY + endY) / 2);
+            console.log('UR consoleLog => ', `${midX} ${midY}`);
+            consoleLog = `${midX} ${midY}`;
+            if (direction[index + 1] === 'DR' || direction[index + 1] === 'R') {
                 startX = midX;
                 startY = midY;
             }
