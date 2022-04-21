@@ -286,4 +286,52 @@ describe('Find bomb based on direction left or right with jump number threshold'
             */
         });
     });
+
+    describe('Find bomb in down', () => {
+        test('One jump', () => {
+            expect(
+                findBomb({
+                    width: 6,
+                    height: 6,
+                    X0: 3,
+                    Y0: 2,
+                    jumpThreshold: 1,
+                    direction: ['D'],
+                    bombPosition: '3 4',
+                })
+            ).toEqual('3 4');
+            /*
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,i,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,b,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            */
+        });
+
+        test('Two jump', () => {
+            expect(
+                findBomb({
+                    width: 6,
+                    height: 6,
+                    X0: 3,
+                    Y0: 2,
+                    jumpThreshold: 1,
+                    direction: ['D', 'D'],
+                    bombPosition: '3 5',
+                })
+            ).toEqual('3 5');
+            /*
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,i,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,.,0,0,0]
+            [0,0,0,b,0,0,0]
+            [0,0,0,0,0,0,0]
+            */
+        });
+    });
 });

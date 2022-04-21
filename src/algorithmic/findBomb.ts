@@ -25,7 +25,7 @@ export const findBomb = ({
     let midX: number | null = null;
     let midY: number | null = null;
 
-    if (direction[0] === 'R' || direction[0] === 'DR') {
+    if (direction[0] === 'R' || direction[0] === 'DR' || direction[0] === 'D') {
         endX = width + 1;
         endY = height + 1;
     } else if (direction[0] === 'L' || direction[0] === 'DL') {
@@ -60,11 +60,28 @@ export const findBomb = ({
         ) {
             midX = Math.floor((startX + endX) / 2);
             midY = Math.floor((startY + endY) / 2);
+            console.log('L consoleLog => ', `${midX} ${midY}`);
             consoleLog = `${midX} ${midY}`;
             if (direction[index + 1] === 'L') {
                 startX = midX;
             } else {
                 endX = midX;
+            }
+        }
+
+        if (
+            direction[index] === 'D' &&
+            typeof endX === 'number' &&
+            typeof endY === 'number'
+        ) {
+            midX = midX || startX;
+            midY = Math.floor((startY + endY) / 2);
+            console.log('D consoleLog => ', `${midX} ${midY}`);
+            consoleLog = `${midX} ${midY}`;
+            if (direction[index + 1] === 'D') {
+                startY = midX;
+            } else {
+                endY = midX;
             }
         }
 
