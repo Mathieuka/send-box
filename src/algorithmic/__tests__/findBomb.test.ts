@@ -335,6 +335,31 @@ describe('Find bomb based on direction left or right with jump number threshold'
         });
     });
 
+    describe('Find bomb in up', () => {
+        test('One jump', () => {
+            expect(
+                findBomb({
+                    width: 6,
+                    height: 6,
+                    X0: 3,
+                    Y0: 2,
+                    jumpThreshold: 1,
+                    direction: ['U'],
+                    bombPosition: '3 1',
+                })
+            ).toEqual('3 1');
+            /*
+            [0,0,0,0,0,0,0]
+            [0,0,0,b,0,0,0]
+            [0,0,0,i,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            */
+        });
+    });
+
     describe('Find bomb in up right', () => {
         test('One jump', () => {
             expect(
@@ -352,6 +377,80 @@ describe('Find bomb based on direction left or right with jump number threshold'
             /*
             [0,0,0,0,0,0,0]
             [0,0,0,0,0,b,0]
+            [0,0,0,i,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            */
+        });
+
+        test('Two jump', () => {
+            expect(
+                findBomb({
+                    width: 6,
+                    height: 6,
+                    X0: 3,
+                    Y0: 2,
+                    jumpThreshold: 2,
+                    direction: ['UR', 'UR'],
+                    bombPosition: '6 0',
+                })
+            ).toEqual('6 0');
+            // hit:
+            /*
+            [0,0,0,0,0,0,b]
+            [0,0,0,0,0,.,0]
+            [0,0,0,i,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            */
+        });
+    });
+
+    describe('Find bomb in up left', () => {
+        test('One jump', () => {
+            expect(
+                findBomb({
+                    width: 6,
+                    height: 6,
+                    X0: 3,
+                    Y0: 2,
+                    jumpThreshold: 1,
+                    direction: ['UL'],
+                    bombPosition: '1 1',
+                })
+            ).toEqual('1 1');
+            // hit:
+            /*
+            [0,0,0,0,0,0,0]
+            [0,b,0,0,0,0,0]
+            [0,0,0,i,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            */
+        });
+
+        test('Two jump', () => {
+            expect(
+                findBomb({
+                    width: 6,
+                    height: 6,
+                    X0: 3,
+                    Y0: 2,
+                    jumpThreshold: 2,
+                    direction: ['UL', 'UL'],
+                    bombPosition: '0 0',
+                })
+            ).toEqual('0 0');
+            // hit:
+            /*
+            [b,0,0,0,0,0,0]
+            [0,.,0,0,0,0,0]
             [0,0,0,i,0,0,0]
             [0,0,0,0,0,0,0]
             [0,0,0,0,0,0,0]
