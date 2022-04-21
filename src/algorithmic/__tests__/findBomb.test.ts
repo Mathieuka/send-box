@@ -214,7 +214,7 @@ describe('Find bomb based on direction left or right with jump number threshold'
             */
         });
 
-        test('Two jump', () => {
+        test('On the corner', () => {
             expect(
                 findBomb({
                     width: 6,
@@ -222,17 +222,42 @@ describe('Find bomb based on direction left or right with jump number threshold'
                     X0: 3,
                     Y0: 2,
                     jumpThreshold: 2,
-                    direction: ['DR', 'R'],
-                    bombPosition: '5 4',
+                    direction: ['DR', 'DR'],
+                    bombPosition: '6 5',
                 })
-            ).toEqual('5 4');
+            ).toEqual('6 5');
+            /*
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,i,0,0,0]
+            [0,0,0,0,0,0,0]
+            [0,0,0,0,0,.,0]
+            [0,0,0,0,0,0,.]
+            [0,0,0,0,0,0,b]
+            */
+        });
+    });
+
+    describe('Find bomb in down left', () => {
+        test('One jump', () => {
+            expect(
+                findBomb({
+                    width: 6,
+                    height: 6,
+                    X0: 3,
+                    Y0: 2,
+                    jumpThreshold: 2,
+                    direction: ['DL'],
+                    bombPosition: '1 4',
+                })
+            ).toEqual('1 4');
             // hit:
             /*
             [0,0,0,0,0,0,0]
             [0,0,0,0,0,0,0]
             [0,0,0,i,0,0,0]
             [0,0,0,0,0,0,0]
-            [0,0,0,0,0,b,0]
+            [0,b,0,0,0,0,0]
             [0,0,0,0,0,0,0]
             [0,0,0,0,0,0,0]
             */
@@ -246,19 +271,18 @@ describe('Find bomb based on direction left or right with jump number threshold'
                     X0: 3,
                     Y0: 2,
                     jumpThreshold: 3,
-                    direction: ['DR', 'DR', 'DR'],
-                    bombPosition: '6 6',
+                    direction: ['DL', 'DL'],
+                    bombPosition: '0 5',
                 })
-            ).toEqual('6 6');
-            // hit:
+            ).toEqual('0 5');
             /*
             [0,0,0,0,0,0,0]
             [0,0,0,0,0,0,0]
             [0,0,0,i,0,0,0]
             [0,0,0,0,0,0,0]
-            [0,0,0,0,.,0,0]
-            [0,0,0,0,0,.,0]
-            [0,0,0,0,0,0,b]
+            [0,.,0,0,0,0,0]
+            [b,0,0,0,0,0,0]
+            [0,0,0,0,0,0,0]
             */
         });
     });

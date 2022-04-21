@@ -37,21 +37,6 @@ export const findBomb = ({
         if (jumps > jumpThreshold) return `Too much jumping => ${consoleLog}`;
 
         if (
-            direction[index] === 'DR' &&
-            typeof endX === 'number' &&
-            typeof endY === 'number'
-        ) {
-            midX = Math.floor((startX + endX) / 2);
-            midY = Math.floor((startY + endY) / 2);
-            console.log('DR consoleLog => ', `${midX} ${midY}`);
-            consoleLog = `${midX} ${midY}`;
-            if (direction[index + 1] === 'DR' || direction[index] === 'R') {
-                startX = midX;
-                startY = midY;
-            }
-        }
-
-        if (
             direction[index] === 'R' &&
             typeof endX === 'number' &&
             typeof endY === 'number'
@@ -68,13 +53,48 @@ export const findBomb = ({
             }
         }
 
-        if (direction[index] === 'L' && typeof endX === 'number') {
+        if (
+            direction[index] === 'L' &&
+            typeof endX === 'number' &&
+            typeof endY === 'number'
+        ) {
             midX = Math.floor((startX + endX) / 2);
-            consoleLog = `${midX} 0`;
+            midY = Math.floor((startY + endY) / 2);
+            consoleLog = `${midX} ${midY}`;
             if (direction[index + 1] === 'L') {
                 startX = midX;
             } else {
                 endX = midX;
+            }
+        }
+
+        if (
+            direction[index] === 'DR' &&
+            typeof endX === 'number' &&
+            typeof endY === 'number'
+        ) {
+            midX = Math.floor((startX + endX) / 2);
+            midY = Math.floor((startY + endY) / 2);
+            console.log('DR consoleLog => ', `${midX} ${midY}`);
+            consoleLog = `${midX} ${midY}`;
+            if (direction[index + 1] === 'DR' || direction[index + 1] === 'R') {
+                startX = midX;
+                startY = midY;
+            }
+        }
+
+        if (
+            direction[index] === 'DL' &&
+            typeof endX === 'number' &&
+            typeof endY === 'number'
+        ) {
+            midX = Math.floor((startX + endX) / 2);
+            midY = Math.floor((startY + endY) / 2);
+            console.log('DL consoleLog => ', `${midX} ${midY}`);
+            consoleLog = `${midX} ${midY}`;
+            if (direction[index + 1] === 'DL' || direction[index + 1] === 'L') {
+                startX = midX;
+                startY = midY;
             }
         }
 
