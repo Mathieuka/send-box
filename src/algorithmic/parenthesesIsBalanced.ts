@@ -1,35 +1,37 @@
-export const parenthesesIsBalanced = (str: string): any => {
-    let stack: string[] = [];
-    const add = (v: string) => {
-        stack = stack.concat(v);
-    };
-    const dequeue = () => stack.pop();
-    const getTop = () => stack[stack.length - 1];
-    const stackIsEmpty = () => stack.length === 0;
-
+export const parenthesesIsBalanced = (str: string): boolean => {
     const arr = str.split('');
+    let stack: string[] = [];
 
     for (let i = 0; i <= arr.length; i += 1) {
-        const topElement = getTop();
+        const topElement = stack[stack.length - 1];
 
-        if (arr[i] === '(' || arr[i] === ')') {
-            if (topElement === '(' && arr[i] === ')') {
-                dequeue();
-                if (stackIsEmpty() && i === str.length - 1) {
+        if (
+            arr[i] === '(' ||
+            arr[i] === ')' ||
+            arr[i] === '[' ||
+            arr[i] === ']' ||
+            arr[i] === '}' ||
+            arr[i] === '{'
+        ) {
+            if (
+                (topElement === '(' && arr[i] === ')') ||
+                (topElement === '[' && arr[i] === ']') ||
+                (topElement === '{' && arr[i] === '}')
+            ) {
+                stack.pop();
+                const stackIsEmpty = stack.length === 0;
+                const noMoreChar = i === str.length - 1;
+
+                if (stackIsEmpty && noMoreChar) {
                     return true;
                 }
-            } else if (
-                (stackIsEmpty() && arr[i] === ')') ||
-                (!stackIsEmpty() && !arr[i])
-            ) {
-                return false;
             }
 
-            if (arr[i] === '(') {
-                add(arr[i]);
+            if (arr[i] === '(' || arr[i] === '[' || arr[i] === '{') {
+                stack = stack.concat(arr[i]);
             }
-        } else {
-            return false;
         }
     }
+
+    return false;
 };
