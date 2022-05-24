@@ -1,36 +1,30 @@
 export function tournamentWinner(competitions: string[][], results: number[]) {
-    const scores: { [key: string]: number } = {};
-    let resultsIdx = 0;
-    let bestScore: null | string = null;
+    const { currentBestTeam } = competitions.reduce(
+        (
+            acc: { [key: string]: any; currentBestTeam: string | null },
+            competition,
+            idx
+        ) => {
+            const homeTeamIsWin = results[idx] === 1;
+            const [homeTeam, awayTeam] = competition;
+            const winner = homeTeamIsWin ? homeTeam : awayTeam;
 
-    for (const competition of competitions) {
-        const winner = competition.reverse()[results[resultsIdx]];
+            if (!acc[winner]) {
+                acc[winner] = 3;
+            } else {
+                acc[winner] += 3;
+            }
 
-        if (!scores[winner]) {
-            scores[winner] = 3;
-        } else {
-            scores[winner] += 3;
-        }
+            if (!acc.currentBestTeam) {
+                acc.currentBestTeam = winner;
+            } else if (acc[winner] > acc[acc.currentBestTeam]) {
+                acc.currentBestTeam = winner;
+            }
 
-        if (!bestScore) {
-            bestScore = winner;
-        } else if (scores[winner] > scores[bestScore]) {
-            bestScore = winner;
-        }
+            return acc;
+        },
+        { currentBestTeam: null }
+    );
 
-        resultsIdx += 1;
-    }
-
-    return bestScore;
+    return currentBestTeam;
 }
-
-// 2 teams
-// 1 winner
-// Winner = 3 points ; loser = 0 points
-// 1 team = home team; Second team = away team
-
-// teams that have competed (competitions) [homeTeam, awayTeam]
-// (results)Array
-
-// results[i] denotes the winner of competition[i]
-// where a 1 === homeTeam win ; 0 === awayTeam win
