@@ -1,12 +1,12 @@
 import {
-    createMuiTheme,
+    createTheme,
     Theme,
     responsiveFontSizes,
 } from '@material-ui/core/styles';
 import { red, blueGrey } from '@material-ui/core/colors';
 
 const theme: Theme = responsiveFontSizes(
-    createMuiTheme({
+    createTheme({
         // ...palette example
         palette: {
             type: 'light',
