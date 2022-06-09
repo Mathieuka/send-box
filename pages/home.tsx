@@ -1,30 +1,38 @@
-import { useState, useEffect } from 'react';
-import {
-    fetchQuestions,
-    fetchSubmissions,
-    Question,
-    Submission,
-} from '../data/questions';
+function debounce(
+    callback: (arg: unknown) => unknown,
+    delay: number,
+    immediate = false
+) {
+    let timeoutID: NodeJS.Timeout | null = null;
+    return (...args: any) => {
+        if (timeoutID === null && immediate) {
+            callback(args);
+        }
+        if (timeoutID) {
+            clearTimeout(timeoutID);
+        }
+        timeoutID = setTimeout(() => {
+            if (!immediate) {
+                callback(args);
+            }
+            timeoutID = null;
+        }, delay);
+    };
+}
 
-const Home = (): JSX.Element => {
-    const [questions, setQuestions] = useState<Question[]>([]);
-    const [submissions, setSubmission] = useState<Submission[]>([]);
+const Home = () => {
+    const myFunction = (arg: any) => {
+        console.log(arg[0]);
+    };
+    const debouncedFunction = debounce(myFunction, 2000, true);
 
-    useEffect(() => {
-        (async () => {
-            await Promise.all([fetchQuestions, fetchSubmissions]).then(
-                ([questions, submissions]) => {
-                    setQuestions(() => questions);
-                    setSubmission(() => submissions);
-                }
-            );
-        })();
-    }, []);
-
-    console.log('questions', questions);
-    console.log('submissions', submissions);
-
-    return <div>Hello</div>;
+    return (
+        <div>
+            <button type="button" onClick={() => debouncedFunction('Clicked')}>
+                Button
+            </button>
+        </div>
+    );
 };
 
 export default Home;
