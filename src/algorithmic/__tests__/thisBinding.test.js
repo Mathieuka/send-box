@@ -13,11 +13,16 @@ Function.prototype.myApply = function (thisContext, args = []) {
     return this.myCall(thisContext, ...args);
 };
 
+// eslint-disable-next-line no-extend-native
+Function.prototype.myBind = function (thisContext, ...args) {
+    return (...newArgs) => this.myApply(thisContext, [...args, ...newArgs]);
+};
+
 const obj = { num: 0 };
 
-function logNums(x, y) {
+function logNums(...args) {
     expect(this).toEqual(obj);
-    return x + y;
+    return args.reduce((a, b) => a + b);
 }
 
 describe('Implement binding function', () => {
@@ -26,8 +31,13 @@ describe('Implement binding function', () => {
         expect(result).toEqual(3);
     });
 
-    test('Implement apply function ', () => {
+    test('Implement `apply` function ', () => {
         const result = logNums.myApply(obj, [1, 2]);
         expect(result).toEqual(3);
+    });
+
+    test('Implement `bind` function ', () => {
+        const functionBound = logNums.myBind(obj, 4);
+        expect(functionBound(1, 2)).toEqual(7);
     });
 });
