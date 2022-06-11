@@ -8,6 +8,11 @@ Function.prototype.myCall = function (thisContext, ...args) {
     return returnValue;
 };
 
+// eslint-disable-next-line no-extend-native
+Function.prototype.myApply = function (thisContext, args = []) {
+    return this.myCall(thisContext, ...args);
+};
+
 const obj = { num: 0 };
 
 function logNums(x, y) {
@@ -15,7 +20,14 @@ function logNums(x, y) {
     return x + y;
 }
 
-test('implement `call` function', () => {
-    const result = logNums.myCall(obj, 1, 2);
-    expect(result).toEqual(3);
+describe('Implement binding function', () => {
+    test('Implement `call` function', () => {
+        const result = logNums.myCall(obj, 1, 2);
+        expect(result).toEqual(3);
+    });
+
+    test('Implement apply function ', () => {
+        const result = logNums.myApply(obj, [1, 2]);
+        expect(result).toEqual(3);
+    });
 });
