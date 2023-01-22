@@ -1,7 +1,7 @@
 import { spiralTraverse } from '../spiralTraverse';
 
 describe('spiralTraverse', () => {
-    test('should return the correct output', () => {
+    test('should return the correct output on 2x2 matrix', () => {
         const input = [
             [1, 2],
             [4, 3],
@@ -10,13 +10,22 @@ describe('spiralTraverse', () => {
         expect(spiralTraverse(input)).toEqual([1, 2, 3, 4]);
     });
 
-    test('should return the correct output', () => {
+    test('(wip) should return the correct output 3x3 matrix', () => {
         const input = [
             [1, 2, 3],
             [8, 9, 4],
             [7, 6, 5],
         ];
 
+        expect(spiralTraverse(input)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
+    });
+
+    test('(final) should return the correct output 3x3 matrix', () => {
+        const input = [
+            [1, 2, 3],
+            [8, 9, 4],
+            [7, 6, 5],
+        ];
         expect(spiralTraverse(input)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     });
 });

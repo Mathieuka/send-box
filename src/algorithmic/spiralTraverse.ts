@@ -5,7 +5,7 @@ export function spiralTraverse(array: number[][]) {
     let rowStartIdx = 0;
 
     let columnEndIdx = array[0].length;
-    const rowEndIdx = array.length - 1;
+    let rowEndIdx = array.length - 1;
 
     for (let i = columnStartIdx; i < columnEndIdx; i += 1) {
         result.push(array[rowStartIdx][i]);
@@ -21,6 +21,12 @@ export function spiralTraverse(array: number[][]) {
 
     for (let i = columnEndIdx - 1; i >= columnStartIdx; i -= 1) {
         result.push(array[rowEndIdx][i]);
+    }
+
+    rowEndIdx -= 1;
+
+    for (let i = rowEndIdx; i >= rowStartIdx; i -= 1) {
+        result.push(array[i][columnStartIdx]);
     }
 
     return result;
