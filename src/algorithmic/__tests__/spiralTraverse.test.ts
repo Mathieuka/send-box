@@ -46,35 +46,6 @@ describe('spiralTraverse', () => {
         ]);
     });
 
-    test('More rows then columns', () => {
-        const input = [
-            [4, 2, 3, 6, 7, 8, 1, 9, 5, 10],
-            [12, 19, 15, 16, 20, 18, 13, 17, 11, 14],
-        ];
-        expect(spiralTraverse(input)).toEqual([
-            4,
-            2,
-            3,
-            6,
-            7,
-            8,
-            1,
-            9,
-            5,
-            10,
-            14,
-            11,
-            17,
-            13,
-            18,
-            20,
-            16,
-            15,
-            19,
-            12,
-        ]);
-    });
-
     test('At least same quantities of rows as columns', () => {
         const input = [
             [27, 12, 35, 26],
@@ -150,6 +121,35 @@ describe('spiralTraverse', () => {
             9,
             10,
             11,
+            12,
+        ]);
+    });
+
+    test('More rows then columns', () => {
+        const input = [
+            [4, 2, 3, 6, 7, 8, 1, 9, 5, 10],
+            [12, 19, 15, 16, 20, 18, 13, 17, 11, 14],
+        ];
+        expect(spiralTraverse(input)).toEqual([
+            4,
+            2,
+            3,
+            6,
+            7,
+            8,
+            1,
+            9,
+            5,
+            10,
+            14,
+            11,
+            17,
+            13,
+            18,
+            20,
+            16,
+            15,
+            19,
             12,
         ]);
     });
