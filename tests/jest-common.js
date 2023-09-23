@@ -10,9 +10,4 @@ module.exports = {
         path.join(__dirname, 'src'),
         path.join(__dirname, 'tests'),
     ],
-    watchPlugins: [
-        'jest-watch-select-projects',
-        'jest-watch-typeahead/testname',
-        'jest-watch-typeahead/filename',
-    ],
 };
