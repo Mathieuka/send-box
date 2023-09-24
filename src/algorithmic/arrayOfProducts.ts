@@ -1,47 +1,30 @@
-export const buildFactorsArrays = (numbers: number[]) => {
-    let idx = 0;
+const getArrayOfProducts = (index: number, number: number[]) => {
+    const clone = [...number];
+    clone.splice(index, 1);
 
-    const arraysOfFactors: number[][] = [];
-    for (let i = 0; i < numbers.length; i += 1) {
-        const arrayToMultiply = [...numbers];
-        arrayToMultiply.splice(idx, 1);
-        idx += 1;
-
-        arraysOfFactors.push(arrayToMultiply);
-    }
-
-    return arraysOfFactors;
+    return clone;
 };
 
-type Accumulator = number[][] | number[];
-
 export function arrayOfProducts(numbers: number[]) {
-    if (numbers.length < 3) {
-        return numbers;
+    const n = numbers.length;
+
+    const result: number[] = new Array(n);
+    let leftProduct = 1;
+
+    // Calculate left products
+    for (let i = 0; i < n; i += 1) {
+        result[i] = leftProduct;
+        leftProduct *= numbers[i];
     }
 
-    const arraysOfFactors = buildFactorsArrays(numbers);
+    let rightProduct = 1;
 
-    return arraysOfFactors.reduce((acc, curr, index) => {
-        let result: undefined | number;
+    // Calculate right products and update the result array
+    for (let i = n - 1; i >= 0; i -= 1) {
+        result[i] *= rightProduct;
 
-        curr.forEach((num, index) => {
-            if (curr[index + 1] !== undefined) {
-                if (result !== undefined) {
-                    result *= curr[index + 1];
-                }
-                if (result === undefined) {
-                    result = 0;
-                    result += num * curr[index + 1];
-                }
-            }
-        });
+        rightProduct *= numbers[i];
+    }
 
-        const copy: number[] = JSON.parse(JSON.stringify(acc));
-        if (typeof result === 'number') {
-            copy[index] = result;
-        }
-
-        return copy;
-    }, arraysOfFactors as Accumulator);
+    return result;
 }
