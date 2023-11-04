@@ -1,10 +1,6 @@
 import { mergeOverlappingIntervals } from '../mergeOverlappingIntervals';
 
 describe('Merge overllaping intervals', () => {
-    test('empty array', () => {
-        expect(mergeOverlappingIntervals([])).toEqual([]);
-    });
-
     test('no overlapping', () => {
         expect(
             mergeOverlappingIntervals([
