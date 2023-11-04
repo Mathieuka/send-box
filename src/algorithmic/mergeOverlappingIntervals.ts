@@ -1,19 +1,34 @@
-export function mergeOverlappingIntervals(array: number[][]) {
-    const values = [...array];
-    if (!array.length) {
-        return [];
+export function mergeOverlappingIntervals(
+    array: number[][],
+    currentIndex = 0
+): any {
+    const values = JSON.parse(
+        JSON.stringify(array.sort((a, b) => a[0] - b[0]))
+    );
+
+    if (values.length === currentIndex) {
+        return values;
     }
 
-    for (let i = 0; i < array.length; i += 1) {
-        const secondNumber = array[i][1];
-        const nextFirstNumber = array[i + 1] && array[i + 1][0];
+    const secondNumber = array[currentIndex] && array[currentIndex][1];
+    const nextFirstNumber =
+        array[currentIndex + 1] && array[currentIndex + 1][0];
+    const nextSecondNumber =
+        array[currentIndex + 1] && array[currentIndex + 1][1];
 
-        if (secondNumber && nextFirstNumber) {
-            if (nextFirstNumber <= secondNumber) {
-                [values[i][1]] = [values[i + 1][1]];
-                values.splice(i + 1, 1);
-            }
+    if (Number.isInteger(secondNumber) && Number.isInteger(nextFirstNumber)) {
+        if (secondNumber > nextFirstNumber && secondNumber > nextSecondNumber) {
+            values.splice(currentIndex + 1, 1);
+            return mergeOverlappingIntervals(values, currentIndex);
         }
+
+        if (secondNumber >= nextFirstNumber) {
+            [values[currentIndex][1]] = [values[currentIndex + 1][1]];
+            values.splice(currentIndex + 1, 1);
+
+            return mergeOverlappingIntervals(values, currentIndex);
+        }
+        return mergeOverlappingIntervals(values, currentIndex + 1);
     }
 
     return values;
