@@ -1,75 +1,64 @@
-// www.codewars.com/kata/58583922c1d5b415b00000ff/train/typescript
+type FighterGrid = Array<string[]>;
+type Position = [number, number];
 
 export function superStreetFighterSelection(
-    fighters: Array<string[]>,
-    position: number[],
+    fighters: FighterGrid,
+    position: Position,
     moves: string[]
 ): string[] {
-    const result: string[] = [];
-    const colLength = fighters[0].length - 1;
-    const rowLength = fighters.length - 1;
-    let currentRow: number = position[0];
-    let currentColumn: number = position[1];
+    const colLength = fighters[0].length;
+    const rowLength = fighters.length;
 
-    const escapeTheSlotWhileIsEmpty = (direction: string) => {
-        while (fighters[currentRow][currentColumn] === '') {
-            currentColumn =
-                direction === 'right' ? currentColumn + 1 : currentColumn - 1;
+    const move = (currentPosition: Position, direction: string): Position => {
+        let [currentRow, currentColumn] = currentPosition;
+
+        switch (direction) {
+            case 'right':
+                do {
+                    currentColumn = (currentColumn + 1) % colLength;
+                } while (fighters[currentRow][currentColumn] === '');
+                break;
+            case 'left':
+                do {
+                    currentColumn = (currentColumn - 1 + colLength) % colLength;
+                } while (fighters[currentRow][currentColumn] === '');
+                break;
+            case 'up':
+                if (
+                    currentRow > 0 &&
+                    fighters[currentRow - 1][currentColumn] !== ''
+                ) {
+                    currentRow -= 1;
+                }
+                break;
+            case 'down':
+                if (
+                    currentRow < rowLength - 1 &&
+                    fighters[currentRow + 1][currentColumn] !== ''
+                ) {
+                    currentRow += 1;
+                }
+                break;
         }
+
+        return [currentRow, currentColumn];
     };
 
-    moves.forEach((direction: string) => {
-        const nextCaseIsOutsideTheFrame =
-            direction === 'right'
-                ? currentColumn + 1 > colLength
-                : currentColumn - 1 < 0;
-        const nextSlotIsEmpty =
-            direction === 'right'
-                ? fighters[currentRow][currentColumn + 1] === ''
-                : fighters[currentRow][currentColumn - 1] === '';
-        const canGoUp =
-            direction === 'up' &&
-            currentRow > 0 &&
-            fighters[currentRow - 1][currentColumn] !== '';
-        const canGoDown =
-            direction === 'down' &&
-            currentRow < rowLength &&
-            fighters[currentRow + 1][currentColumn] !== '';
+    const processMove = (
+        acc: { currentPosition: Position; result: string[] },
+        direction: string
+    ) => {
+        const nextPosition = move(acc.currentPosition, direction);
+        const [finalRow, finalColumn] = nextPosition;
+        return {
+            currentPosition: nextPosition,
+            result: [...acc.result, fighters[finalRow][finalColumn]],
+        };
+    };
 
-        if (direction === 'right' || direction === 'left') {
-            if (nextSlotIsEmpty || nextCaseIsOutsideTheFrame) {
-                if (direction === 'right') {
-                    if (currentColumn + 1 >= colLength) {
-                        currentColumn = 0;
-                    } else {
-                        currentColumn += 1;
-                    }
-                }
+    const initialState = { currentPosition: position, result: [] as string[] };
 
-                if (direction === 'left') {
-                    if (currentColumn - 1 <= 0) {
-                        currentColumn = colLength;
-                    } else {
-                        currentColumn -= 1;
-                    }
-                }
-                escapeTheSlotWhileIsEmpty(direction);
-            } else {
-                currentColumn += direction === 'right' ? +1 : -1;
-            }
-        }
-
-        if (direction === 'up' || direction === 'down') {
-            if (canGoUp) {
-                currentRow -= 1;
-            }
-            if (canGoDown) {
-                currentRow += 1;
-            }
-        }
-
-        result.push(fighters[currentRow][currentColumn]);
-    });
+    const { result } = moves.reduce(processMove, initialState);
 
     return result;
 }
