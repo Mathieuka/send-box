@@ -1,9 +1,7 @@
-const sort = (results: number[]) => results.sort((a, b) => b - a);
-
 export function sweetAndSavory(dishes: number[], target: number): number[] {
-    const clonedDishes: number[] = JSON.parse(JSON.stringify(dishes));
-    const positiveNums = sort(clonedDishes.filter((num) => num > 0));
-    const negativeNums = sort(clonedDishes.filter((num) => num <= 0));
+    const clonedDishes: number[] = [...dishes].sort((a, b) => b - a);
+    const positiveNums = clonedDishes.filter((num) => num > 0);
+    const negativeNums = clonedDishes.filter((num) => num <= 0);
     let currentGap = Infinity;
     let currentResult = [0, 0];
 
