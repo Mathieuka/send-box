@@ -1,4 +1,4 @@
-export enum ItemEnum {
+export enum ItemName {
     eggs = 'eggs',
     peanuts = 'peanuts',
     shellfish = 'shellfish',
@@ -32,7 +32,7 @@ const items: IItem = {
 };
 
 interface IAllergies {
-    allergicTo: (itemName: ItemEnum) => boolean;
+    allergicTo: (itemName: ItemName) => boolean;
     // list: () => string[];
 }
 
@@ -40,11 +40,7 @@ export class Allergies implements IAllergies {
     // eslint-disable-next-line no-useless-constructor,@typescript-eslint/no-empty-function
     constructor(private score: number) {}
 
-    public allergicTo(itemName: ItemEnum): boolean {
-        if (items[itemName] > this.score) {
-            return false;
-        }
-
-        return true;
+    public allergicTo(itemName: ItemName): boolean {
+        return items[itemName] <= this.score;
     }
 }

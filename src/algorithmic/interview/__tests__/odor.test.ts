@@ -1,31 +1,31 @@
-import { Allergies, ItemEnum } from '../odor';
+import { Allergies, ItemName } from '../odor';
 
 describe('allergicTo', () => {
     it('no allergies means not allergic', () => {
         const allergies = new Allergies(0);
 
-        expect(allergies.allergicTo(ItemEnum.peanuts)).toBeFalsy();
+        expect(allergies.allergicTo(ItemName.peanuts)).toBeFalsy();
 
-        expect(allergies.allergicTo(ItemEnum.cats)).toBeFalsy();
+        expect(allergies.allergicTo(ItemName.cats)).toBeFalsy();
 
-        expect(allergies.allergicTo(ItemEnum.strawberries)).toBeFalsy();
+        expect(allergies.allergicTo(ItemName.strawberries)).toBeFalsy();
     });
 
     it('is allergic to eggs', () => {
         const allergies = new Allergies(1);
 
-        expect(allergies.allergicTo(ItemEnum.eggs)).toBeTruthy();
+        expect(allergies.allergicTo(ItemName.eggs)).toBeTruthy();
     });
 
-    // it('allergic to eggs in addition to other stuff', () => {
-    //     const allergies = new Allergies(5);
-    //
-    //     expect(allergies.allergicTo('eggs')).toBeTruthy();
-    //
-    //     expect(allergies.allergicTo('shellfish')).toBeTruthy();
-    //
-    //     expect(allergies.allergicTo('strawberries')).toBeFalsy();
-    // });
+    it('allergic to eggs in addition to other stuff', () => {
+        const allergies = new Allergies(5);
+
+        expect(allergies.allergicTo(ItemName.eggs)).toBeTruthy();
+
+        expect(allergies.allergicTo(ItemName.shellfish)).toBeTruthy();
+
+        expect(allergies.allergicTo(ItemName.strawberries)).toBeFalsy();
+    });
 });
 
 describe.skip('list', () => {
