@@ -41,7 +41,7 @@ export class Allergies implements IAllergies {
     constructor(private score: number) {}
 
     public allergicTo(itemName: ItemEnum): boolean {
-        if (items[itemName] >= this.score) {
+        if (items[itemName] > this.score) {
             return false;
         }
 

@@ -11,12 +11,12 @@ describe('allergicTo', () => {
         expect(allergies.allergicTo(ItemEnum.strawberries)).toBeFalsy();
     });
 
-    // it('is allergic to eggs', () => {
-    //     const allergies = new Allergies(1);
-    //
-    //     expect(allergies.allergicTo('eggs')).toBeTruthy();
-    // });
-    //
+    it('is allergic to eggs', () => {
+        const allergies = new Allergies(1);
+
+        expect(allergies.allergicTo(ItemEnum.eggs)).toBeTruthy();
+    });
+
     // it('allergic to eggs in addition to other stuff', () => {
     //     const allergies = new Allergies(5);
     //
