@@ -46,38 +46,38 @@ describe('Allergies', () => {
             expect(allergies.list()).toEqual(expected);
         });
 
-        // it('allergic to just peanuts', () => {
-        //     const allergies = new Allergies(2);
-        //
-        //     const expected = ['peanuts'];
-        //
-        //     expect(allergies.list()).toEqual(expected);
-        // });
-        //
-        // it('allergic to just strawberries', () => {
-        //     const allergies = new Allergies(8);
-        //
-        //     const expected = ['strawberries'];
-        //
-        //     expect(allergies.list()).toEqual(expected);
-        // });
-        //
-        // it('allergic to eggs and peanuts', () => {
-        //     const allergies = new Allergies(3);
-        //
-        //     const expected = ['eggs', 'peanuts'];
-        //
-        //     expect(allergies.list()).toEqual(expected);
-        // });
-        //
-        // it('allergic to more than eggs but not peanuts', () => {
-        //     const allergies = new Allergies(5);
-        //
-        //     const expected = ['eggs', 'shellfish'];
-        //
-        //     expect(allergies.list()).toEqual(expected);
-        // });
-        //
+        it('allergic to just peanuts', () => {
+            const allergies = new Allergies(2);
+
+            const expected = ['peanuts'];
+
+            expect(allergies.list()).toEqual(expected);
+        });
+
+        it('allergic to just strawberries', () => {
+            const allergies = new Allergies(8);
+
+            const expected = ['strawberries'];
+
+            expect(allergies.list()).toEqual(expected);
+        });
+
+        it('allergic to eggs and peanuts', () => {
+            const allergies = new Allergies(3);
+
+            const expected = ['eggs', 'peanuts'];
+
+            expect(allergies.list()).toEqual(expected);
+        });
+
+        it('allergic to more than eggs but not peanuts', () => {
+            const allergies = new Allergies(5);
+
+            const expected = ['eggs', 'shellfish'];
+
+            expect(allergies.list()).toEqual(expected);
+        });
+
         // it('allergic to lots of stuff', () => {
         //     const allergies = new Allergies(248);
         //

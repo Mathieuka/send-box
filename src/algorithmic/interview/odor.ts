@@ -20,7 +20,7 @@ interface IItem {
     cats: number;
 }
 
-const items: IItem = {
+const items: Record<ItemName, number> = {
     eggs: 1,
     peanuts: 2,
     shellfish: 4,
@@ -33,7 +33,7 @@ const items: IItem = {
 
 interface IAllergies {
     allergicTo: (itemName: ItemName) => boolean;
-    list: () => string[];
+    list: () => ItemName[];
 }
 
 export class Allergies implements IAllergies {
@@ -46,10 +46,16 @@ export class Allergies implements IAllergies {
 
     // eslint-disable-next-line class-methods-use-this
     public list(): ItemName[] {
+        const accumulator = 0;
         const allergicItems: ItemName[] = [];
+
         for (const item in items) {
             if (items[item as ItemName] <= this.score) {
                 allergicItems.push(item as ItemName);
+
+                if (items[item as ItemName] === this.score) {
+                    return [item as ItemName];
+                }
             }
         }
 
