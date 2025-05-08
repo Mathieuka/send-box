@@ -33,7 +33,7 @@ const items: IItem = {
 
 interface IAllergies {
     allergicTo: (itemName: ItemName) => boolean;
-    // list: () => string[];
+    list: () => string[];
 }
 
 export class Allergies implements IAllergies {
@@ -42,5 +42,10 @@ export class Allergies implements IAllergies {
 
     public allergicTo(itemName: ItemName): boolean {
         return items[itemName] <= this.score;
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    public list() {
+        return [];
     }
 }
