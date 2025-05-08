@@ -45,7 +45,14 @@ export class Allergies implements IAllergies {
     }
 
     // eslint-disable-next-line class-methods-use-this
-    public list() {
-        return [];
+    public list(): ItemName[] {
+        const allergicItems: ItemName[] = [];
+        for (const item in items) {
+            if (items[item as ItemName] <= this.score) {
+                allergicItems.push(item as ItemName);
+            }
+        }
+
+        return allergicItems;
     }
 }

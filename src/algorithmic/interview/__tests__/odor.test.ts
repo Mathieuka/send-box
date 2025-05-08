@@ -37,14 +37,15 @@ describe('Allergies', () => {
 
             expect(allergies.list()).toEqual(expected);
         });
-        // it('allergic to just eggs', () => {
-        //     const allergies = new Allergies(1);
-        //
-        //     const expected = ['eggs'];
-        //
-        //     expect(allergies.list()).toEqual(expected);
-        // });
-        //
+
+        it('allergic to just eggs', () => {
+            const allergies = new Allergies(1);
+
+            const expected = ['eggs'];
+
+            expect(allergies.list()).toEqual(expected);
+        });
+
         // it('allergic to just peanuts', () => {
         //     const allergies = new Allergies(2);
         //
