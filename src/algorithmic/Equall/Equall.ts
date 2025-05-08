@@ -1,14 +1,21 @@
 import { Input } from './__tests__/inputs';
 
-interface Stream {
+interface IStream {
     out: (input: Input[]) => string;
 }
 
-export class Stream {
-    // eslint-disable-next-line no-useless-constructor
-    constructor() {}
+export class Stream implements IStream {
+    public out(inputs: Input[]) {
+        let response = '';
 
-    public out(input: Input[]) {
-        return input[0].content;
+        for (let i = 0; i < inputs.length; i += 1) {
+            if (i === 0) {
+                response += inputs[i].content;
+            } else {
+                response += ` ${inputs[i].content}`;
+            }
+        }
+
+        return response;
     }
 }
